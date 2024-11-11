@@ -9,10 +9,25 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   //TODO : 1. deklarasi variabel yg dibutuhkn
-  bool isSignedIn = true;
-  String fullName = 'Theresia Chintia';
-  String userName = 'thereesiaaa';
+  bool isSignedIn = false;
+  String fullName = 'Citra Suryanto';
+  String userName = 'CitraSuryanto';
   int FavoriteCandiCount = 0;
+
+  //TODO : 5 Implementasi fungsi SignIn
+  void SignIn(){
+    setState(() {
+      isSignedIn = !isSignedIn;
+    });
+  }
+
+  //TODO : 6 Implementasi fungsi SignOut
+  void SignOut(){
+    setState(() {
+      isSignedIn = !isSignedIn;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -62,7 +77,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               //TODO : 3. bagian profile pp (foto pp)
               //baris satu profile
               const SizedBox(height: 20,),
-              Divider(color: Colors.deepPurple[100],),
+              Divider(color: Colors.deepPurple[100],
+              ),
               const SizedBox(height: 4,
               ),
               Row(
@@ -77,7 +93,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           'Pengguna', 
                           style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold,
-                          ) ,), 
+                          ) ,
+                          ), 
                       ],
                     ),
                   ),
@@ -86,9 +103,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ': $userName',
                     style: TextStyle(fontSize: 18),
                     )),
-              //baris dua profile
+                ],
+              ),
+              //baris dua nama
               const SizedBox(height: 20,),
-              Divider(color: Colors.deepPurple[100],),
+              Divider(color: Colors.deepPurple[100],
+              ),
               const SizedBox(height: 4,
               ),
               Row(
@@ -97,33 +117,65 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     width: MediaQuery.of(context).size.width/3,
                     child: const Row(
                       children: [
-                        Icon(
-                          Icons.lock,
-                          color: Colors.amber,
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
+                        Icon(Icons.person, color: Colors.blue,),
+                        const SizedBox(width: 8,),
                         Text(
-                          'asfdhs',
+                          'Nama', 
                           style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold,
-                          ),
-                        )
+                          ) ,
+                          ), 
                       ],
                     ),
                   ),
                   Expanded(
-                    child: Text(': $userName',
+                    child: Text(
+                      ': $fullName',
                     style: TextStyle(fontSize: 18),
-                    ))
+                    )),
+                    if (isSignedIn) const Icon(Icons.edit),
                 ],
-              )
-
-                
+              ),
+              //baris tiga fav
+              const SizedBox(height: 20,),
+              Divider(color: Colors.deepPurple[100],
+              ),
+              const SizedBox(height: 4,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width/3,
+                    child: const Row(
+                      children: [
+                        Icon(Icons.favorite, color: Colors.red,),
+                        const SizedBox(width: 8,),
+                        Text(
+                          'Favorit', 
+                          style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold,
+                          ) ,
+                          ), 
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      ': $FavoriteCandiCount',
+                    style: TextStyle(fontSize: 18),
+                    )),
                 ],
               ),
               //TODO : 4. profile action (sign in/out)
+              const SizedBox(height: 20,
+              ),
+              Divider(color: Colors.deepPurple[100],
+              ),
+              const SizedBox(height: 4,
+              ),
+              isSignedIn 
+                ? TextButton(onPressed: SignOut, child: const Text('Sign Out'))
+                  : TextButton(onPressed: SignIn, child: const Text('Sign In'))
             ],
           ),
         ),
